@@ -71,6 +71,18 @@ body {
   color: var(--main-title-grey);
 }
 
+.sc-title {
+  color: var(--main-red);
+}
+
+.sc-card-title {
+  color: var(--main-orange);
+}
+
+.sc-card-desc {
+  color: var(--main-title-grey);
+}
+
 .main-footer {
   background: var(--main-title-grey);
 }
