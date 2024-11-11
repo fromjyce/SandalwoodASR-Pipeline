@@ -23,6 +23,18 @@ body {
   background: var(--background);
 }
 
+.almarai {
+  font-family: var(--font-almarai);
+}
+
+.league_spartan {
+  font-family: var(--font-league-spartan);
+}
+
+.lexend_deca {
+  font-family: var(--font-lexend-deca);
+}
+
 .footer {
   background: var(--main-text-green);
 }
