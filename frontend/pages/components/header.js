@@ -9,8 +9,8 @@ const Header = () => {
       <h1 className="text-2xl font-bold lexend_deca">SandalwoodAI</h1>
     </div>
     <div className="flex space-x-4">
-      <a href="#" className="hover:bg-[#D4CBBD] px-4 py-2 rounded-lg bg-[#FEF3E2] league_spartan text-[#171717] font-bold">Home</a>
-      <a href="#upload" className="hover:bg-[#D4CBBD] px-4 py-2 rounded-lg bg-[#FEF3E2] league_spartan text-[#171717] font-bold">Upload the Audio</a>
+      <a href="/main" className="hover:bg-[#D4CBBD] px-4 py-2 rounded-lg bg-[#FEF3E2] league_spartan text-[#171717] font-bold">Home</a>
+      <a href="/searchchoice" className="hover:bg-[#D4CBBD] px-4 py-2 rounded-lg bg-[#FEF3E2] league_spartan text-[#171717] font-bold">Upload the Audio</a>
     </div>
   </div>
 </header>
