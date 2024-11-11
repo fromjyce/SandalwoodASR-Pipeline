@@ -35,6 +35,10 @@ body {
   font-family: var(--font-lexend-deca);
 }
 
+.main-header {
+  background-color: var(--main-orange);
+}
+
 .main-footer {
-  background: var(--main-text-green);
+  background: var(--main-title-grey);
 }
