@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header = () => {
   return (
-    <header className="main-header py-5">
+    <header className="main-header py-6">
   <div className="max-w-7xl mx-auto px-4 flex items-center justify-between text-white">
     <div className="flex items-center justify-center space-x-4">
       <img src="/logo.png" alt="Logo" className="h-10 w-10" />
