@@ -1,7 +1,7 @@
 import "./globals.css";
 import {Lexend_Deca, League_Spartan, Almarai} from "next/font/google"
 
-const lecend_dexa_init = Lexend_Deca({
+const lexend_deca_init = Lexend_Deca({
   subsets: ['latin'],
   weight: ['400'],
   variable: '--font-lexend-deca',
@@ -27,7 +27,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${almarai_init.variable} ${league_spartan_init.variable} ${lecend_dexa_init.variable}`}>
+      <body className={`${almarai_init.variable} ${league_spartan_init.variable} ${lexend_deca_init.variable}`}>
         {children}
       </body>
     </html>
