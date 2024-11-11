@@ -1,22 +1,13 @@
 import React from 'react';
 import Footer from './components/footer';
 import Header from './components/header';
+import CalltoAction from './components/main/calltoaction';
 
 const Main = () => {
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
       <Header />
-
-      {/* Call to Action Section */}
-      <section className="mt-12 text-center">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-3xl font-semibold text-gray-800">Join us in preserving indigenous knowledge!</h2>
-          <p className="mt-4 text-lg text-gray-600">Upload audio or ask a question related to sandalwood cultivation, and let our AI-powered system provide relevant insights and information.</p>
-          <div className="mt-8">
-            <a href="#upload" className="inline-block bg-yellow-500 text-white px-6 py-3 rounded-lg text-lg hover:bg-yellow-600 transition duration-300">Get Started</a>
-          </div>
-        </div>
-      </section>
+      <CalltoAction />
 
       {/* How It Works Section */}
       <section className="bg-white py-16">
