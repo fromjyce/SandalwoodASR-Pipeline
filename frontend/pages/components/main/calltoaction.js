@@ -8,7 +8,7 @@ const CalltoAction = () => {
           <h2 className="text-3xl font-semibold cta-title league_spartan">Join us in preserving indigenous knowledge!</h2>
           <p className="mt-4 text-lg cta-subline lexend_deca">Upload audio or ask a question related to sandalwood cultivation, and let our AI-powered system provide relevant insights and information.</p>
           <div className="mt-8">
-            <a href="#upload" className="inline-block bg-[#FA812F] font-bold text-[#171717] px-6 py-3 rounded-lg text-lg hover:bg-[#FAA42F] transition duration-300 almarai">
+            <a href="/searchchoice" className="inline-block bg-[#FA812F] font-bold text-[#171717] px-6 py-3 rounded-lg text-lg hover:bg-[#FAA42F] transition duration-300 almarai">
               Get Started
             </a>
           </div>
