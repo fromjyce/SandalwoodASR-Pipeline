@@ -51,6 +51,26 @@ body {
   color: var(--main-title-grey);
 }
 
+.main-how-it-works {
+  background-color: #FEF3E2;
+}
+
+.htw-title {
+  color: var(--main-text-green);
+}
+
+.htw-subtitle {
+  color: var(--main-title-grey);
+}
+
+.card-title {
+  color: var(--main-orange);
+}
+
+.card-descr {
+  color: var(--main-title-grey);
+}
+
 .main-footer {
   background: var(--main-title-grey);
 }
