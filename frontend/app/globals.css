@@ -9,7 +9,7 @@
   --main-orange: #FA812F;
   --main-red: #FA4032;
   --main-title-grey: #685f5c;
-  --main-text-green: ##2f3a32;
+  --main-text-green: #2f3a32;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,6 +20,9 @@
 }
 
 body {
-  color: var(--foreground);
   background: var(--background);
+}
+
+.footer {
+  background: var(--main-text-green);
 }
