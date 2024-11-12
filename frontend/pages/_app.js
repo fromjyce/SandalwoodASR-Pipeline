@@ -1,5 +1,5 @@
 import "../app/globals.css";
-import {Lexend_Deca, League_Spartan, Almarai} from "next/font/google"
+import {Lexend_Deca, League_Spartan, Almarai, Poppins} from "next/font/google"
 
 const lexend_deca_init = Lexend_Deca({
   subsets: ['latin'],
@@ -13,6 +13,12 @@ const almarai_init = Almarai({
     variable: '--font-almarai',
   });
 
+const poppins_init = Poppins({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-poppins',
+});
+
 const league_spartan_init = League_Spartan({
   subsets: ['latin'],
   weight: ['400'],
@@ -21,7 +27,7 @@ const league_spartan_init = League_Spartan({
 
 function MyApp({ Component, pageProps }) {
   return (
-    <div className={`${almarai_init.variable} ${league_spartan_init.variable} ${lexend_deca_init.variable}`}>
+    <div className={`${almarai_init.variable} ${league_spartan_init.variable} ${lexend_deca_init.variable} ${poppins_init.variable}`}>
       <main>
         <Component {...pageProps} />
       </main>
