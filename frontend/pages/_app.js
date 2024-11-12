@@ -13,11 +13,11 @@ const almarai_init = Almarai({
     variable: '--font-almarai',
   });
 
-const poppins_init = Poppins({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-poppins',
-});
+  const poppins_init = Poppins({
+    subsets: ['latin'],
+    weight: ['100','200','300','400','500','600','700','800','900'],
+    variable: '--font-poppins',
+  });
 
 const league_spartan_init = League_Spartan({
   subsets: ['latin'],
