@@ -12,7 +12,7 @@ const SearchChoice = () => {
         <meta name="description" content="An AI-powered platform for processing and understanding Kannada audio resources on sandalwood cultivation, enabling users to query and explore indigenous knowledge through speech recognition." />
       </Head>
       <Header />
-      <div className='spacer-top'></div>
+      <div className='sc-spacer-top'></div>
       <div className="bg-[#FEF3E2] flex flex-col items-center justify-center">
         <h1 className="text-4xl font-bold sc-title mb-4 league_spartan">Choose Your Search Method</h1>
         <div className="flex flex-col md:flex-row items-center justify-center gap-8">
@@ -40,7 +40,7 @@ const SearchChoice = () => {
           </Link>
         </div>
       </div>
-      <div className='spacer-bottom'></div>
+      <div className='sc-spacer-bottom'></div>
       <Footer />
     </>
   );
