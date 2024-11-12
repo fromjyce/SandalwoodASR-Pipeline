@@ -93,6 +93,16 @@ body {
   color: var(--main-title-grey);
 }
 
+.stt-spacer-top {
+  height: 3.9rem;
+  background: #FEF3E2;
+}
+
+.stt-spacer-bottom {
+  height: 5.63rem;
+  background: #FEF3E2;
+}
+
 .main-footer {
   background: var(--main-title-grey);
 }
