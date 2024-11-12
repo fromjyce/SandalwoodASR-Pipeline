@@ -1,10 +1,16 @@
 import "./globals.css";
-import {Lexend_Deca, League_Spartan, Almarai} from "next/font/google"
+import {Lexend_Deca, League_Spartan, Almarai, Poppins} from "next/font/google"
 
 const lexend_deca_init = Lexend_Deca({
   subsets: ['latin'],
   weight: ['400'],
   variable: '--font-lexend-deca',
+});
+
+const poppins_init = Poppins({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-poppins',
 });
 
 const league_spartan_init = League_Spartan({
@@ -27,7 +33,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${almarai_init.variable} ${league_spartan_init.variable} ${lexend_deca_init.variable}`}>
+      <body className={`${almarai_init.variable} ${league_spartan_init.variable} ${lexend_deca_init.variable} ${poppins_init.variable}`}>
         {children}
       </body>
     </html>
