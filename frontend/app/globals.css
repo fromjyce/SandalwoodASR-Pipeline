@@ -10,6 +10,10 @@
   --main-red: #FA4032;
   --main-title-grey: #685f5c;
   --main-text-green: #2f3a32;
+  --main-brown: #6c4446;
+  --main-magenta: #4d0732;
+  --main-red: #9e090e;
+  --main-green: #164802;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -33,6 +37,10 @@ body {
 
 .lexend_deca {
   font-family: var(--font-lexend-deca);
+}
+
+.poppins {
+  font-family: var(--font-poppins);
 }
 
 .main-header {
@@ -99,8 +107,20 @@ body {
 }
 
 .stt-spacer-bottom {
-  height: 5.63rem;
+  height: 5.4rem;
   background: #FEF3E2;
+}
+
+.stt-title {
+  color: var(--main-brown);
+}
+
+.stt-subtitle {
+  font-size: 1.3rem;
+}
+
+.stt-option-choose {
+  color: var(--main-red);
 }
 
 .main-footer {
