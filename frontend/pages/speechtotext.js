@@ -150,7 +150,7 @@ const SpeechToText = () => {
           <div className="flex items-center justify-center space-x-4">
             <button
               onClick={handleSubmit}
-              className="bg-[#FA812F] league_spartan text-black px-4 py-2 rounded-lg hover:bg-[#FA5D2F] transition"
+              className="bg-[#FA812F] league_spartan text-black px-4 py-2 rounded-lg hover:bg-[#FA5D2F] transition font-bold"
               disabled={!recognizedText && !uploadText}
             >
               Submit Query
