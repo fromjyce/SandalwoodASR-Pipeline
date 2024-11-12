@@ -1,10 +1,9 @@
-"use client";
-import React, { useState } from 'react';
-import { FaFileAudio } from "react-icons/fa6";
-import { FaMicrophone } from "react-icons/fa";
+import React, { useState, useRef } from 'react';
+import { FaFileAudio, FaMicrophoneSlash, FaMicrophone, FaSyncAlt } from "react-icons/fa";
 import Head from "next/head";
 import Header from './components/header';
 import Footer from './components/footer';
+import { SiTicktick } from "react-icons/si";
 
 const SpeechToText = () => {
   const [isListening, setIsListening] = useState(false);
@@ -12,6 +11,12 @@ const SpeechToText = () => {
   const [error, setError] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadText, setUploadText] = useState('');
+  const [isFileProcessed, setIsFileProcessed] = useState(false);
+  const [isTextboxVisible, setTextboxVisible] = useState(false); // State for text box visibility
+  const [fileUploaded, setFileUploaded] = useState(false); // New state to track file upload
+
+  const fileInputRef = useRef(null); // Reference for the file input
+
   let recognition;
   if (typeof window !== 'undefined' && 'webkitSpeechRecognition' in window) {
     recognition = new window.webkitSpeechRecognition();
@@ -19,9 +24,15 @@ const SpeechToText = () => {
     recognition.continuous = false;
     recognition.interimResults = true;
     
-    recognition.onstart = () => setIsListening(true);
+    recognition.onstart = () => {
+      setIsListening(true);
+      setTextboxVisible(true); // Show the text box when recording starts
+    };
     recognition.onerror = (e) => setError(e.error);
-    recognition.onend = () => setIsListening(false);
+    recognition.onend = () => {
+      setIsListening(false);
+      setTextboxVisible(true); // Keep the text box visible after recording ends
+    };
     recognition.onresult = (event) => {
       const transcript = Array.from(event.results)
         .map(result => result[0].transcript)
@@ -29,6 +40,7 @@ const SpeechToText = () => {
       setRecognizedText(transcript);
     };
   }
+  
   const handleStartListening = () => {
     if (recognition) {
       setRecognizedText('');
@@ -42,6 +54,7 @@ const SpeechToText = () => {
       recognition.stop();
     }
   };
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -49,6 +62,8 @@ const SpeechToText = () => {
       console.log("File selected:", file.name);
       setTimeout(() => {
         setUploadText(`Processed text from ${file.name}`);
+        setIsFileProcessed(true);
+        setFileUploaded(true); // Mark the file as uploaded
       }, 2000);
     }
   };
@@ -56,6 +71,21 @@ const SpeechToText = () => {
   const handleSubmit = () => {
     if (recognizedText || uploadText) {
       console.log("Submitting text:", recognizedText || uploadText);
+    }
+  };
+
+  const handleReload = () => {
+    setRecognizedText('');
+    setSelectedFile(null);
+    setUploadText('');
+    setIsFileProcessed(false);
+    setTextboxVisible(false); // Hide the text box on reload
+    setError(null);
+    setFileUploaded(false); // Reset file uploaded state
+
+    // Reset the file input by clearing the value
+    if (fileInputRef.current) {
+      fileInputRef.current.value = null;
     }
   };
 
@@ -75,37 +105,65 @@ const SpeechToText = () => {
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div className="border border-black rounded-lg p-4 text-center cursor-pointer hover:bg-[#FAE6CD]"
               onClick={isListening ? handleStopListening : handleStartListening}>
-              <FaMicrophone className="text-3xl mx-auto mb-2 text-green-500" />
+              {isListening ? (
+                <FaMicrophoneSlash className="text-3xl mx-auto mb-2 text-red-500" />
+              ) : (
+                <FaMicrophone className="text-3xl mx-auto mb-2 text-green-500" />
+              )}
               <p className="text-md font-bold stt-option-choose league_spartan">
                 {isListening ? 'Stop Recording' : 'Start Recording'}
               </p>
             </div>
             <div className="border border-black rounded-lg p-4 text-center cursor-pointer hover:bg-[#FAE6CD]">
               <label className="cursor-pointer flex flex-col items-center">
-                <FaFileAudio className="text-3xl mb-2 text-blue-500" />
-                <p className="text-md font-bold stt-option-choose league_spartan">Upload Audio File</p>
-                <input type="file" accept="audio/*" className="hidden" onChange={handleFileChange} />
+                {fileUploaded ? (
+                  <SiTicktick className="text-3xl mb-2 text-green-500" />
+                ) : (
+                  <FaFileAudio className="text-3xl mb-2 text-blue-500" />
+                )}
+                <p className="text-md font-bold stt-option-choose league_spartan">
+                  {fileUploaded ? 'Audio File Uploaded' : 'Upload Audio File'}
+                </p>
+                <input 
+                  type="file" 
+                  accept="audio/*" 
+                  className="hidden" 
+                  onChange={handleFileChange} 
+                  ref={fileInputRef} // Attach the ref
+                />
               </label>
             </div>
           </div>
-          <div className="border border-black rounded p-4 mb-4 h-24 text-gray-700 overflow-auto league_spartan">
-            {recognizedText || (isListening ? 'Listening...' : 'Your speech will appear here')}
-          </div>
+          {isTextboxVisible && (
+            <div className="border border-black rounded p-4 mb-4 h-24 text-gray-700 overflow-auto league_spartan">
+              {recognizedText || (isListening ? 'Listening...' : 'Your speech will appear here')}
+            </div>
+          )}
           {uploadText && (
-            <div className="border border-gray-300 rounded p-4 mb-4 text-gray-700">
+            <div className="border border-black rounded p-4 mb-4 text-black league_spartan">
               {uploadText}
             </div>
           )}
 
-          {error && <p className="text-red-500 mb-4">Error: {error}</p>}
+          {error && <p className="text-red-500 mb-4 league_spartan">Error: {error}</p>}
 
-          <button
-            onClick={handleSubmit}
-            className="bg-[#FA812F] league_spartan text-black px-4 py-2 rounded-lg hover:bg-[#FA5D2F] transition"
-            disabled={!recognizedText && !uploadText}
-          >
-            Submit Query
-          </button>
+          <div className="flex items-center justify-center space-x-4">
+            <button
+              onClick={handleSubmit}
+              className="bg-[#FA812F] league_spartan text-black px-4 py-2 rounded-lg hover:bg-[#FA5D2F] transition"
+              disabled={!recognizedText && !uploadText}
+            >
+              Submit Query
+            </button>
+            {(recognizedText || uploadText) && (
+              <button
+                onClick={handleReload}
+                className="text-2xl text-black hover:text-[#FA5D2F] transition"
+              >
+                <FaSyncAlt />
+              </button>
+            )}
+          </div>
         </div>
       </div>
       <div className='stt-spacer-bottom'></div>
