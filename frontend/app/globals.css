@@ -71,6 +71,16 @@ body {
   color: var(--main-title-grey);
 }
 
+.spacer-top {
+  height: 150px;
+  background: #FEF3E2;
+}
+
+.spacer-bottom {
+  height: 175px;
+  background: #FEF3E2;
+}
+
 .sc-title {
   color: var(--main-red);
 }
