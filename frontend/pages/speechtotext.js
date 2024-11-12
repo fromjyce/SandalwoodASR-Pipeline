@@ -12,10 +12,10 @@ const SpeechToText = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadText, setUploadText] = useState('');
   const [isFileProcessed, setIsFileProcessed] = useState(false);
-  const [isTextboxVisible, setTextboxVisible] = useState(false); // State for text box visibility
-  const [fileUploaded, setFileUploaded] = useState(false); // New state to track file upload
+  const [isTextboxVisible, setTextboxVisible] = useState(false);
+  const [fileUploaded, setFileUploaded] = useState(false);
 
-  const fileInputRef = useRef(null); // Reference for the file input
+  const fileInputRef = useRef(null);
 
   let recognition;
   if (typeof window !== 'undefined' && 'webkitSpeechRecognition' in window) {
@@ -26,12 +26,12 @@ const SpeechToText = () => {
     
     recognition.onstart = () => {
       setIsListening(true);
-      setTextboxVisible(true); // Show the text box when recording starts
+      setTextboxVisible(true);
     };
     recognition.onerror = (e) => setError(e.error);
     recognition.onend = () => {
       setIsListening(false);
-      setTextboxVisible(true); // Keep the text box visible after recording ends
+      setTextboxVisible(true);
     };
     recognition.onresult = (event) => {
       const transcript = Array.from(event.results)
@@ -63,7 +63,7 @@ const SpeechToText = () => {
       setTimeout(() => {
         setUploadText(`Processed text from ${file.name}`);
         setIsFileProcessed(true);
-        setFileUploaded(true); // Mark the file as uploaded
+        setFileUploaded(true);
       }, 2000);
     }
   };
@@ -79,11 +79,9 @@ const SpeechToText = () => {
     setSelectedFile(null);
     setUploadText('');
     setIsFileProcessed(false);
-    setTextboxVisible(false); // Hide the text box on reload
+    setTextboxVisible(false);
     setError(null);
-    setFileUploaded(false); // Reset file uploaded state
-
-    // Reset the file input by clearing the value
+    setFileUploaded(false);
     if (fileInputRef.current) {
       fileInputRef.current.value = null;
     }
@@ -129,7 +127,7 @@ const SpeechToText = () => {
                   accept="audio/*" 
                   className="hidden" 
                   onChange={handleFileChange} 
-                  ref={fileInputRef} // Attach the ref
+                  ref={fileInputRef}
                 />
               </label>
             </div>
