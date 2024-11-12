@@ -2,6 +2,9 @@
 import React, { useState } from 'react';
 import { FaFileAudio } from "react-icons/fa6";
 import { FaMicrophone } from "react-icons/fa";
+import Head from "next/head";
+import Header from './components/header';
+import Footer from './components/footer';
 
 const SpeechToText = () => {
   const [isListening, setIsListening] = useState(false);
@@ -57,48 +60,57 @@ const SpeechToText = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6">
-      <h1 className="text-4xl font-bold mb-6 text-gray-800">Speech-to-Text Search</h1>
-      
-      <div className="w-full max-w-lg bg-white rounded-lg shadow-md p-6 text-center">
-        <p className="text-lg font-medium mb-4">Choose an option to search:</p>
-        
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="border border-gray-300 rounded-lg p-4 text-center cursor-pointer hover:bg-gray-100"
-            onClick={isListening ? handleStopListening : handleStartListening}>
-            <FaMicrophone className="text-3xl mx-auto mb-2 text-green-500" />
-            <p className="text-md font-medium">
-              {isListening ? 'Stop Recording' : 'Start Recording'}
-            </p>
+    <>
+      <Head>
+        <title>SandalwoodAI - Speech to Text</title>
+        <meta name="description" content="An AI-powered platform for processing and understanding Kannada audio resources on sandalwood cultivation, enabling users to query and explore indigenous knowledge through speech recognition." />
+      </Head>
+      <Header />
+      <div className='stt-spacer-top'></div>
+      <div className="flex flex-col items-center justify-center bg-[#FEF3E2] p-6">
+        <h1 className="text-4xl font-bold mb-6 stt-title lexend_deca">Explore Sandalwood Cultivation Through Speech</h1>
+        <p className="mb-8 stt-subtitle league_spartan">Record or upload your query and uncover insights from traditional knowledge and modern practices of sandalwood cultivation.</p>
+        <div className="w-full max-w-lg bg-[#f9decd] rounded-lg shadow-md p-6 text-center">
+          <p className="text-xl font-medium mb-4 poppins stt-option-choose">Choose an option</p>
+          <div className="grid grid-cols-2 gap-4 mb-6">
+            <div className="border border-black rounded-lg p-4 text-center cursor-pointer hover:bg-[#FAE6CD]"
+              onClick={isListening ? handleStopListening : handleStartListening}>
+              <FaMicrophone className="text-3xl mx-auto mb-2 text-green-500" />
+              <p className="text-md font-bold stt-option-choose league_spartan">
+                {isListening ? 'Stop Recording' : 'Start Recording'}
+              </p>
+            </div>
+            <div className="border border-black rounded-lg p-4 text-center cursor-pointer hover:bg-[#FAE6CD]">
+              <label className="cursor-pointer flex flex-col items-center">
+                <FaFileAudio className="text-3xl mb-2 text-blue-500" />
+                <p className="text-md font-bold stt-option-choose league_spartan">Upload Audio File</p>
+                <input type="file" accept="audio/*" className="hidden" onChange={handleFileChange} />
+              </label>
+            </div>
           </div>
-          <div className="border border-gray-300 rounded-lg p-4 text-center cursor-pointer hover:bg-gray-100">
-            <label className="cursor-pointer flex flex-col items-center">
-              <FaFileAudio className="text-3xl mb-2 text-blue-500" />
-              <p className="text-md font-medium">Upload Audio File</p>
-              <input type="file" accept="audio/*" className="hidden" onChange={handleFileChange} />
-            </label>
+          <div className="border border-black rounded p-4 mb-4 h-24 text-gray-700 overflow-auto league_spartan">
+            {recognizedText || (isListening ? 'Listening...' : 'Your speech will appear here')}
           </div>
-        </div>
-        <div className="border border-gray-300 rounded p-4 mb-4 h-24 text-gray-700 overflow-auto">
-          {recognizedText || (isListening ? 'Listening...' : 'Your speech will appear here')}
-        </div>
-        {uploadText && (
-          <div className="border border-gray-300 rounded p-4 mb-4 text-gray-700">
-            {uploadText}
-          </div>
-        )}
+          {uploadText && (
+            <div className="border border-gray-300 rounded p-4 mb-4 text-gray-700">
+              {uploadText}
+            </div>
+          )}
 
-        {error && <p className="text-red-500 mb-4">Error: {error}</p>}
-        
-        <button
-          onClick={handleSubmit}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
-          disabled={!recognizedText && !uploadText}
-        >
-          Submit Query
-        </button>
+          {error && <p className="text-red-500 mb-4">Error: {error}</p>}
+
+          <button
+            onClick={handleSubmit}
+            className="bg-[#FA812F] league_spartan text-black px-4 py-2 rounded-lg hover:bg-[#FA5D2F] transition"
+            disabled={!recognizedText && !uploadText}
+          >
+            Submit Query
+          </button>
+        </div>
       </div>
-    </div>
+      <div className='stt-spacer-bottom'></div>
+      <Footer />
+    </>
   );
 };
 
