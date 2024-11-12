@@ -71,12 +71,12 @@ body {
   color: var(--main-title-grey);
 }
 
-.spacer-top {
+.sc-spacer-top {
   height: 150px;
   background: #FEF3E2;
 }
 
-.spacer-bottom {
+.sc-spacer-bottom {
   height: 175px;
   background: #FEF3E2;
 }
