@@ -14,7 +14,7 @@ const SearchChoice = () => {
       <Header />
       <div className='sc-spacer-top'></div>
       <div className="bg-[#FEF3E2] flex flex-col items-center justify-center">
-        <h1 className="text-4xl font-bold sc-title mb-4 league_spartan">Choose Your Search Method</h1>
+        <h1 className="text-4xl font-bold sc-title mb-6 league_spartan">Choose Your Search Method</h1>
         <div className="flex flex-col md:flex-row items-center justify-center gap-8">
           <Link href="/speechtotext" className="group w-full md:w-64 bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 hover:scale-105 transform min-h-[300px] flex flex-col justify-center">
             <div className="text-center flex flex-col items-center">
