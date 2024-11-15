@@ -20,7 +20,7 @@ const SpeechToText = () => {
   let recognition;
   if (typeof window !== 'undefined' && 'webkitSpeechRecognition' in window) {
     recognition = new window.webkitSpeechRecognition();
-    recognition.lang = 'kn-IN';
+    recognition.lang = 'en-US';
     recognition.continuous = false;
     recognition.interimResults = true;
     
