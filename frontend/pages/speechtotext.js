@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useRef } from 'react';
 import { FaFileAudio, FaMicrophoneSlash, FaMicrophone, FaSyncAlt } from "react-icons/fa";
 import Head from "next/head";
@@ -61,7 +62,7 @@ const SpeechToText = () => {
       setSelectedFile(file);
       console.log("File selected:", file.name);
       setTimeout(() => {
-        setUploadText(`Processed text from ${file.name}`);
+        setUploadText(`Processed Audio from ${file.name}`);
         setIsFileProcessed(true);
         setFileUploaded(true);
       }, 2000);
