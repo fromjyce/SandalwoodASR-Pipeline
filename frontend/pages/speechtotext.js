@@ -101,7 +101,7 @@ const SpeechToText = () => {
   const handleSubmit = async () => {
     if (recognizedText || uploadText) {
       try {
-        const response = await fetch(process.env.NEXT_PUBLIC_DJANGO_SUBMIT_URL, {
+        const response = await fetch(process.env.NEXT_PUBLIC_DJANGO_SUBMIT_STT_URL, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
