@@ -7,10 +7,9 @@ import { SiTicktick } from "react-icons/si";
 
 const translateText = async (text, targetLanguage = "kn") => {
   try {
+    const apiUrl = process.env.NEXT_PUBLIC_DJANGO_TRANSLATE_URL;
     const response = await fetch(
-      `https://api.mymemory.translated.net/get?q=${encodeURIComponent(
-        text
-      )}&langpair=en|${targetLanguage}`
+      `${apiUrl}?q=${encodeURIComponent(text)}&langpair=en|${targetLanguage}`
     );
     const data = await response.json();
     if (data.responseData) {
@@ -167,13 +166,12 @@ const SpeechToText = () => {
           </div>
           {kanndaText && (
             <div className="border border-black rounded p-4 mb-4 text-black league_spartan">
-              <p className="font-bold stt-option-choose mb-2">Kannada</p>
-              {kanndaText}
+              {kanndaText || (isListening ? 'Listening...' : 'Your speech will appear here')}
             </div>
           )}
           {isTextboxVisible && (
             <div className="border border-black rounded p-4 mb-4 text-black league_spartan">
-              {recognizedText || (isListening ? 'Listening...' : 'Your speech will appear here')}
+              {recognizedText}
             </div>
           )}
           {uploadText && (
