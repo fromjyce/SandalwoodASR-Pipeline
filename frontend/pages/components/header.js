@@ -10,7 +10,7 @@ const Header = () => {
     </div>
     <div className="flex space-x-4">
       <a href="/main" className="hover:bg-[#D4CBBD] px-4 py-2 rounded-lg bg-[#FEF3E2] league_spartan text-[#171717] font-bold">Home</a>
-      <a href="/searchchoice" className="hover:bg-[#D4CBBD] px-4 py-2 rounded-lg bg-[#FEF3E2] league_spartan text-[#171717] font-bold">Upload the Audio</a>
+      <a href="/searchchoice" className="hover:bg-[#D4CBBD] px-4 py-2 rounded-lg bg-[#FEF3E2] league_spartan text-[#171717] font-bold">Ask A Question!</a>
     </div>
   </div>
 </header>
