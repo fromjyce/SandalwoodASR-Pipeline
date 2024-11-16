@@ -62,21 +62,20 @@ const SpeechToText = () => {
     };
   }
 
-  // useEffect to trigger translation when recognizedText is updated
   useEffect(() => {
     if (recognizedText) {
       const translate = async () => {
         const translated = await translateText(recognizedText, "kn");
-        setKannadaText(translated); // Set the translated text
+        setKannadaText(translated);
       };
       translate();
     }
-  }, [recognizedText]); // This will run whenever recognizedText changes
+  }, [recognizedText]);
 
   const handleStartListening = () => {
     if (recognition) {
       setRecognizedText('');
-      setKannadaText(''); // Reset Kannada translation on new recording
+      setKannadaText('');
       setError(null);
       recognition.start();
     }
@@ -109,7 +108,7 @@ const SpeechToText = () => {
 
   const handleReload = () => {
     setRecognizedText('');
-    setKannadaText(''); // Reset Kannada translation
+    setKannadaText('');
     setSelectedFile(null);
     setUploadText('');
     setIsFileProcessed(false);
@@ -176,7 +175,7 @@ const SpeechToText = () => {
               {uploadText}
             </div>
           )}
-          {kanndaText && ( // Display Kannada translation once available
+          {kanndaText && (
             <div className="border border-black rounded p-4 mb-4 text-black league_spartan">
               <p className="font-bold">Kannada Translation:</p>
               {kanndaText}
