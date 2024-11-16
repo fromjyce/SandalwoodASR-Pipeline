@@ -113,9 +113,9 @@ const TextToText = () => {
 
         {results && (
           <div className="mt-8 w-full max-w-lg bg-[#f9decd] items-center justify-center text-center p-6 rounded-lg shadow-lg">
-            <h2 className="text-xl font-semibold poppins stt-option-choose mb-2">Results</h2>
+            <h2 className="text-xl font-semibold poppins stt-option-choose mb-2">Answer</h2>
             <div className="font-medium">
-              <p>{results.answer}</p>
+              <p className='league_spartan'>{results.answer}</p>
               <h5 className='text-md font-semibold poppins stt-option-choose mt-3'>Play this Audio!</h5>
               {results.filename && (
                 <audio controls className="mt-4 w-full">
