@@ -118,13 +118,10 @@ const SpeechToText = () => {
   
         if (response.ok) {
           console.log("Text submitted successfully:", data);
-          alert("Text submitted successfully!");
         } else {
-          console.error("Error submitting text:", data);
           alert("Failed to submit text. Please try again.");
         }
       } catch (error) {
-        console.error("Submission error:", error);
         alert("An error occurred while submitting the text.");
       }
     } else {
