@@ -16,11 +16,9 @@ const translateText = async (text, targetLanguage = "kn") => {
     if (data.responseData) {
       return data.responseData.translatedText;
     } else {
-      console.error("Translation API error:", data);
       return "Translation error.";
     }
   } catch (error) {
-    console.error("Translation request failed:", error);
     return "Translation failed.";
   }
 };
