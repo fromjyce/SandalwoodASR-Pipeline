@@ -10,6 +10,7 @@ const TextToText = () => {
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState(null);
   const [filename, setFilename] = useState(null);
+  const [translatedAnswer, setTranslatedAnswer] = useState(null);
   const router = useRouter();
 
   const handleSearch = async (e) => {
@@ -44,6 +45,8 @@ const TextToText = () => {
           filename: data.filename,
         });
         setFilename(data.filename || "Unknown file");
+        const kannadaAnswer = await translateText(data.answer, "kn");
+        setTranslatedAnswer(kannadaAnswer);
       } else {
         alert("Error: Invalid response from backend.");
       }
@@ -58,7 +61,7 @@ const TextToText = () => {
     try {
       const apiUrl = process.env.NEXT_PUBLIC_DJANGO_TRANSLATE_URL;
       const response = await fetch(
-        `${apiUrl}?q=${encodeURIComponent(text)}&langpair=kn|${targetLanguage}`
+        `${apiUrl}?q=${encodeURIComponent(text)}&langpair=${targetLanguage === "en" ? "kn|en" : "en|kn"}`
       );
       const data = await response.json();
       if (data.responseData) {
@@ -116,6 +119,10 @@ const TextToText = () => {
             <h2 className="text-xl font-semibold poppins stt-option-choose mb-2">Answer</h2>
             <div className="font-medium">
               <p className='league_spartan'>{results.answer}</p>
+              {translatedAnswer && (
+                <p className="league_spartan mt-2">{translatedAnswer}
+                </p>
+              )}
               <h5 className='text-md font-semibold poppins stt-option-choose mt-3'>Play this Audio!</h5>
               {results.filename && (
                 <audio controls className="mt-4 w-full">
