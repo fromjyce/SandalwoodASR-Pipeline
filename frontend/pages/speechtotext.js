@@ -132,7 +132,7 @@ const SpeechToText = () => {
         <h1 className="text-4xl font-bold mb-6 stt-title lexend_deca">Explore Sandalwood Cultivation Through Speech</h1>
         <p className="mb-8 stt-subtitle league_spartan">Record or upload your query and uncover insights from traditional knowledge and modern practices of sandalwood cultivation.</p>
         <div className="w-full max-w-lg bg-[#f9decd] rounded-lg shadow-md p-6 text-center">
-          <p className="text-xl font-medium mb-4 poppins stt-option-choose">Choose an option</p>
+          <p className="text-xl font-bold mb-4 poppins stt-option-choose">Choose an option</p>
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div className="border border-black rounded-lg p-4 text-center cursor-pointer hover:bg-[#FAE6CD]"
               onClick={isListening ? handleStopListening : handleStartListening}>
