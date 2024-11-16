@@ -27,6 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+import environ
+env = environ.Env()
+environ.Env.read_env()
+GEMINI_API_KEY = env('GEMINI_API_KEY')
+
+
 
 # Application definition
 
