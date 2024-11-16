@@ -1,14 +1,34 @@
-"use client";
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaFileAudio, FaMicrophoneSlash, FaMicrophone, FaSyncAlt } from "react-icons/fa";
 import Head from "next/head";
 import Header from './components/header';
 import Footer from './components/footer';
 import { SiTicktick } from "react-icons/si";
 
+const translateText = async (text, targetLanguage = "kn") => {
+  try {
+    const response = await fetch(
+      `https://api.mymemory.translated.net/get?q=${encodeURIComponent(
+        text
+      )}&langpair=en|${targetLanguage}`
+    );
+    const data = await response.json();
+    if (data.responseData) {
+      return data.responseData.translatedText;
+    } else {
+      console.error("Translation API error:", data);
+      return "Translation error.";
+    }
+  } catch (error) {
+    console.error("Translation request failed:", error);
+    return "Translation failed.";
+  }
+};
+
 const SpeechToText = () => {
   const [isListening, setIsListening] = useState(false);
   const [recognizedText, setRecognizedText] = useState('');
+  const [kanndaText, setKannadaText] = useState('');
   const [error, setError] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadText, setUploadText] = useState('');
@@ -41,10 +61,22 @@ const SpeechToText = () => {
       setRecognizedText(transcript);
     };
   }
-  
+
+  // useEffect to trigger translation when recognizedText is updated
+  useEffect(() => {
+    if (recognizedText) {
+      const translate = async () => {
+        const translated = await translateText(recognizedText, "kn");
+        setKannadaText(translated); // Set the translated text
+      };
+      translate();
+    }
+  }, [recognizedText]); // This will run whenever recognizedText changes
+
   const handleStartListening = () => {
     if (recognition) {
       setRecognizedText('');
+      setKannadaText(''); // Reset Kannada translation on new recording
       setError(null);
       recognition.start();
     }
@@ -77,6 +109,7 @@ const SpeechToText = () => {
 
   const handleReload = () => {
     setRecognizedText('');
+    setKannadaText(''); // Reset Kannada translation
     setSelectedFile(null);
     setUploadText('');
     setIsFileProcessed(false);
@@ -143,7 +176,12 @@ const SpeechToText = () => {
               {uploadText}
             </div>
           )}
-
+          {kanndaText && ( // Display Kannada translation once available
+            <div className="border border-black rounded p-4 mb-4 text-black league_spartan">
+              <p className="font-bold">Kannada Translation:</p>
+              {kanndaText}
+            </div>
+          )}
           {error && <p className="text-red-500 mb-4 league_spartan">Error: {error}</p>}
 
           <div className="flex items-center justify-center space-x-4">
