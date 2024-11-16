@@ -123,6 +123,16 @@ body {
   color: var(--main-red);
 }
 
+.ttt-spacer-top {
+  height: 9.1rem;
+  background-color: #FEF3E2;
+}
+
+.ttt-spacer-bottom {
+  height: 9.1rem;
+  background-color: #FEF3E2;
+}
+
 .main-footer {
   background: var(--main-title-grey);
 }
