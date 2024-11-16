@@ -33,6 +33,7 @@ const SpeechToText = () => {
   const [isFileProcessed, setIsFileProcessed] = useState(false);
   const [isTextboxVisible, setTextboxVisible] = useState(false);
   const [fileUploaded, setFileUploaded] = useState(false);
+  const [queryResponse, setQueryResponse] = useState(null);
 
   const fileInputRef = useRef(null);
 
@@ -107,8 +108,8 @@ const SpeechToText = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            english_text: recognizedText || uploadText,
-            kannada_text: kanndaText,
+            kannadaText: kanndaText,
+            englishText: recognizedText || uploadText,
           }),
         });
   
@@ -116,6 +117,10 @@ const SpeechToText = () => {
   
         if (response.ok) {
           console.log("Text submitted successfully:", data);
+          setQueryResponse({
+            answer: data.answer,
+            filename: data.filename
+          });
         } else {
           alert("Failed to submit text. Please try again.");
         }
@@ -125,8 +130,8 @@ const SpeechToText = () => {
     } else {
       alert("Please provide text to submit.");
     }
-  };  
-
+  };
+  
   const handleReload = () => {
     setRecognizedText('');
     setKannadaText('');
@@ -222,6 +227,20 @@ const SpeechToText = () => {
             )}
           </div>
         </div>
+
+        {queryResponse && (
+      <div className="mt-8 w-full max-w-lg bg-[#f9decd] items-center justify-center text-center p-6 rounded-lg shadow-lg">
+        <h2 className="text-xl font-semibold poppins stt-option-choose mb-2">Answer</h2>
+        <p className="mb-2 league_spartan font-medium">{queryResponse.answer}</p>
+        <h5 className='text-md font-semibold poppins stt-option-choose mt-3'>Play this Audio!</h5>
+        {queryResponse.filename && (
+                <audio controls className="mt-4 w-full">
+                 <source src={`/Sandalwood_Audios/${queryResponse.filename}`} type="audio/wav" />
+                 Your browser does not support the audio element.
+                </audio>
+          )}
+      </div>
+    )}
       </div>
       <div className='stt-spacer-bottom'></div>
       <Footer />
