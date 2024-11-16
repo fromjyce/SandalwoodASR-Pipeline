@@ -1,9 +1,9 @@
-"use client"
-import React, { useState, useEffect, useRef } from 'react';
+"use client";
+import React, { useState, useEffect, useRef } from "react";
 import { FaFileAudio, FaMicrophoneSlash, FaMicrophone, FaSyncAlt } from "react-icons/fa";
 import Head from "next/head";
-import Header from './components/header';
-import Footer from './components/footer';
+import Header from "./components/header";
+import Footer from "./components/footer";
 import { SiTicktick } from "react-icons/si";
 
 const translateText = async (text, targetLanguage = "kn") => {
@@ -25,25 +25,26 @@ const translateText = async (text, targetLanguage = "kn") => {
 
 const SpeechToText = () => {
   const [isListening, setIsListening] = useState(false);
-  const [recognizedText, setRecognizedText] = useState('');
-  const [kanndaText, setKannadaText] = useState('');
+  const [recognizedText, setRecognizedText] = useState("");
+  const [kanndaText, setKannadaText] = useState("");
   const [error, setError] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [uploadText, setUploadText] = useState('');
+  const [uploadText, setUploadText] = useState("");
   const [isFileProcessed, setIsFileProcessed] = useState(false);
   const [isTextboxVisible, setTextboxVisible] = useState(false);
   const [fileUploaded, setFileUploaded] = useState(false);
   const [queryResponse, setQueryResponse] = useState(null);
+  const [translatedAnswer, setTranslatedAnswer] = useState("");
 
   const fileInputRef = useRef(null);
 
   let recognition;
-  if (typeof window !== 'undefined' && 'webkitSpeechRecognition' in window) {
+  if (typeof window !== "undefined" && "webkitSpeechRecognition" in window) {
     recognition = new window.webkitSpeechRecognition();
-    recognition.lang = 'en-US';
+    recognition.lang = "en-US";
     recognition.continuous = false;
     recognition.interimResults = true;
-    
+
     recognition.onstart = () => {
       setIsListening(true);
       setTextboxVisible(true);
@@ -55,8 +56,8 @@ const SpeechToText = () => {
     };
     recognition.onresult = (event) => {
       const transcript = Array.from(event.results)
-        .map(result => result[0].transcript)
-        .join('');
+        .map((result) => result[0].transcript)
+        .join("");
       setRecognizedText(transcript);
     };
   }
@@ -73,8 +74,8 @@ const SpeechToText = () => {
 
   const handleStartListening = () => {
     if (recognition) {
-      setRecognizedText('');
-      setKannadaText('');
+      setRecognizedText("");
+      setKannadaText("");
       setError(null);
       recognition.start();
     }
@@ -103,24 +104,26 @@ const SpeechToText = () => {
     if (recognizedText || uploadText) {
       try {
         const response = await fetch(process.env.NEXT_PUBLIC_DJANGO_SUBMIT_STT_URL, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             kannadaText: kanndaText,
             englishText: recognizedText || uploadText,
           }),
         });
-  
+
         const data = await response.json();
-  
+
         if (response.ok) {
           console.log("Text submitted successfully:", data);
           setQueryResponse({
             answer: data.answer,
-            filename: data.filename
+            filename: data.filename,
           });
+          const translatedAnswerText = await translateText(data.answer, "kn");
+          setTranslatedAnswer(translatedAnswerText);
         } else {
           alert("Failed to submit text. Please try again.");
         }
@@ -131,16 +134,18 @@ const SpeechToText = () => {
       alert("Please provide text to submit.");
     }
   };
-  
+
   const handleReload = () => {
-    setRecognizedText('');
-    setKannadaText('');
+    setRecognizedText("");
+    setKannadaText("");
     setSelectedFile(null);
-    setUploadText('');
+    setUploadText("");
     setIsFileProcessed(false);
     setTextboxVisible(false);
     setError(null);
     setFileUploaded(false);
+    setQueryResponse(null);
+    setTranslatedAnswer("");
     if (fileInputRef.current) {
       fileInputRef.current.value = null;
     }
@@ -231,7 +236,10 @@ const SpeechToText = () => {
         {queryResponse && (
       <div className="mt-8 w-full max-w-lg bg-[#f9decd] items-center justify-center text-center p-6 rounded-lg shadow-lg">
         <h2 className="text-xl font-semibold poppins stt-option-choose mb-2">Answer</h2>
-        <p className="mb-2 league_spartan font-medium">{queryResponse.answer}</p>
+        <p className="league_spartan font-medium">{queryResponse.answer}</p>
+        {translatedAnswer && (
+          <p className=" mt-2 text-black league_spartan">{translatedAnswer}</p>
+          )}
         <h5 className='text-md font-semibold poppins stt-option-choose mt-3'>Play this Audio!</h5>
         {queryResponse.filename && (
                 <audio controls className="mt-4 w-full">
