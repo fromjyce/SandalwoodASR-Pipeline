@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from "next/head";
@@ -9,10 +9,13 @@ const TextToText = () => {
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState(null);
+  const [filename, setFilename] = useState(null);
   const router = useRouter();
+
   const handleSearch = async (e) => {
     e.preventDefault();
     if (query.trim() === '') return;
+
     const kannadaRegex = /[\u0C80-\u0CFF]/;
     if (!kannadaRegex.test(query)) {
       alert("Please enter text in Kannada.");
@@ -23,12 +26,27 @@ const TextToText = () => {
 
     try {
       const translatedQuery = await translateText(query, "en");
-      setTimeout(() => {
+      const response = await fetch(process.env.NEXT_PUBLIC_DJANGO_SUBMIT_TTT_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          kannadaText: query,
+          englishText: translatedQuery,
+        }),
+      });
+
+      const data = await response.json();
+      if (data && data.answer && data.filename) {
         setResults({
-          answer: `Translated Query: ${translatedQuery}`,
-          audioSegment: '/path/to/dummy/audio.wav',
+          answer: data.answer,
+          filename: data.filename,
         });
-      }, 1500);
+        setFilename(data.filename || "Unknown file");
+      } else {
+        alert("Error: Invalid response from backend.");
+      }
     } catch (error) {
       console.error('Error during search:', error);
     } finally {
@@ -97,11 +115,14 @@ const TextToText = () => {
           <div className="mt-8 w-full max-w-lg bg-[#f9decd] items-center justify-center text-center p-6 rounded-lg shadow-lg">
             <h2 className="text-xl font-semibold poppins stt-option-choose mb-2">Results</h2>
             <div className="font-medium">
-              <p>{results.answer}</p>
-              <audio controls className="mt-4 w-full">
-                <source src={results.audioSegment} type="audio/wav" />
-                Your browser does not support the audio element.
-              </audio>
+              <p><strong>Answer:</strong> {results.answer}</p>
+              <p><strong>Filename:</strong> {results.filename}</p>
+              {results.filename && (
+                <audio controls className="mt-4 w-full">
+                  <source src={`/Sandalwood_Audios/${results.filename}`} type="audio/wav" />
+                  Your browser does not support the audio element.
+                </audio>
+              )}
             </div>
           </div>
         )}
