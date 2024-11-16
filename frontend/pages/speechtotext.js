@@ -165,8 +165,14 @@ const SpeechToText = () => {
               </label>
             </div>
           </div>
+          {kanndaText && (
+            <div className="border border-black rounded p-4 mb-4 text-black league_spartan">
+              <p className="font-bold stt-option-choose mb-2">Kannada</p>
+              {kanndaText}
+            </div>
+          )}
           {isTextboxVisible && (
-            <div className="border border-black rounded p-4 mb-4 h-24 text-gray-700 overflow-auto league_spartan">
+            <div className="border border-black rounded p-4 mb-4 text-black league_spartan">
               {recognizedText || (isListening ? 'Listening...' : 'Your speech will appear here')}
             </div>
           )}
@@ -175,12 +181,7 @@ const SpeechToText = () => {
               {uploadText}
             </div>
           )}
-          {kanndaText && (
-            <div className="border border-black rounded p-4 mb-4 text-black league_spartan">
-              <p className="font-bold">Kannada Translation:</p>
-              {kanndaText}
-            </div>
-          )}
+          
           {error && <p className="text-red-500 mb-4 league_spartan">Error: {error}</p>}
 
           <div className="flex items-center justify-center space-x-4">
