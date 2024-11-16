@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React, { useState, useEffect, useRef } from 'react';
 import { FaFileAudio, FaMicrophoneSlash, FaMicrophone, FaSyncAlt } from "react-icons/fa";
 import Head from "next/head";
