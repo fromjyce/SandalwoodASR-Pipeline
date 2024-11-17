@@ -16,7 +16,7 @@ The tasks included:
 2. **Speech-Based Question Answering:** Build a pipeline to process user queries (speech or text) and return relevant segments of audio and text-based answers.  
 
 ### **Dataset**  
-The dataset consists of Kannada-language audio files scraped from YouTube, focusing on sandalwood cultivation. These files were recorded in natural, colloquial language with minor background noise, making it a realistic and challenging corpus.  
+The dataset consists of 71 Kannada-language audio files scraped from YouTube, focusing on sandalwood cultivation. These files were recorded in natural, colloquial language with minor background noise, making it a realistic and challenging corpus.  
 
 ---
 
@@ -76,3 +76,11 @@ For text-based queries:
 
 ### **Conclusion**  
 SandalwoodAI exemplifies the fusion of tradition and technology. By providing bilingual access to sandalwood cultivation knowledge, it fosters cultural preservation and practical application. We are proud to contribute to the conservation and propagation of one of India’s most cherished resources.  
+
+## Contact
+
+For any issues or suggestions regarding the project, please contact us at `jaya2004kra@gmail.com`. We appreciate any feedback that can help us improve the application.
+
+## License
+
+All scripts and documentation in this repository are licensed under the GNU GENERAL PUBLIC LICENSE. You may use and modify them for educational purposes. However, we do not take responsibility for the accuracy or reliability of the programs.
