@@ -3,9 +3,10 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import pandas as pd
 import google.generativeai as genai
+from django.conf import settings
 
 
-api_key = "AIzaSyDcRBHj_i9bLnu0y2oqCCU2F1lVGwj7skQ"
+api_key = settings.GEMINI_API_KEY
 genai.configure(api_key=api_key)
 csv_file_path = r"sandalwood/files/Translated_Transcriptions.csv"
 df = pd.read_csv(csv_file_path)
@@ -52,8 +53,8 @@ def submit_text(request):
                 matched_row = df[df['Translation'].str.contains(english_text, case=False, na=False)].iloc[0]
                 gemini_filename = matched_row['Filename']
             return JsonResponse({
-                'answer': "Kottaligiri village",
-                'filename': "SandalWoodNewsStories_287.mp3"
+                'answer': gemini_answer,
+                'filename': gemini_filename
             })
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
@@ -76,8 +77,8 @@ def submit_query(request):
                 matched_row = df[df['Translation'].str.contains(english_text, case=False, na=False)].iloc[0]
                 gemini_filename = matched_row['Filename']
             return JsonResponse({
-                'answer': "The farmer, who has built his livelihood through agriculture and witnessed the success of the Sriganta crop, is now a role model for all of us. He has gained widespread recognition, not only in our state but also internationally.",
-                'filename': "SandalWoodNewsStories_99.mp3"
+                'answer': gemini_answer,
+                'filename': gemini_filename
             })
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
