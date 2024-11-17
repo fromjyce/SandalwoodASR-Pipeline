@@ -1,4 +1,4 @@
-# Detailed Submission Report: SandalwoodAI - An AI-Powered Platform for Kannada-Based ASR and Knowledge Querying 
+# SandalwoodAI - An AI-Powered Platform for Kannada-Based ASR and Knowledge Querying 
 
 ### **Team Information**
 1. [**Rohith Ganesh Kanchi**](https://github.com/rZk1809) - Team Leader & Machine Learning Engineer
