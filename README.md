@@ -21,7 +21,7 @@ SandalwoodAI is a comprehensive platform designed to preserve and disseminate in
 
 ---
 
-### **Problem Statement**  
+## **Problem Statement**  
 Sandalwood holds immense cultural, therapeutic, and economic significance in India, particularly in Karnataka. Despite its value, knowledge about its cultivation remains fragmented. The challenge was to create a robust workflow that processes Kannada-language audio resources, enabling laypersons to query these resources for relevant information.  
 
 The tasks included:  
@@ -30,15 +30,15 @@ The tasks included:
 
 ---
 
-### **Dataset**  
+## **Dataset**  
 The dataset consists of 71 Kannada-language audio files scraped from YouTube, focusing on sandalwood cultivation. These files were recorded in natural, colloquial language with minor background noise, making it a realistic and challenging corpus.  
 
 ---
 
-### **Task 1: Speech Recognition Workflow**  
+## **Task 1: Speech Recognition Workflow**  
 We developed an ASR pipeline using state-of-the-art open-source tools and models, optimized for the colloquial Kannada language.  
 
-#### **Workflow Architecture**  
+### **Workflow Architecture**  
 **1. Speech Input:** Users upload or record their audio.  
 **2. Denoising:** Audio is preprocessed with **Denoiser DNS 64** by META Research for noise reduction.  
 **3. Voice Enhancement:** Audio clarity is enhanced using **Pyannote-audio-enhancer**.  
@@ -47,16 +47,16 @@ We developed an ASR pipeline using state-of-the-art open-source tools and models
 **6. Punctuation and Transliteration:** Transcribed text undergoes punctuation restoration, transliteration, and translation to English using the **AI4Bharat** model.  
 **7. Grammar and Spell Check:** The English text is refined for grammatical correctness and readability.
 
-#### **Architecture Diagram**
+### **Architecture Diagram**
 
 <img src="files/FlowChart.png" alt="SandalwoodAI" width="500">
 
-#### **Outcome**  
+### **Outcome**  
 The ASR model accurately transcribes and translates Kannada audio, producing grammatically refined English text ready for search and query processing.  
 
 ---
 
-### **Task 2: Speech-Based Question Answering**  
+## **Task 2: Speech-Based Question Answering**  
 <div style="display: flex; align-items: flex-start;">
 
 <div style="flex: 1; padding-right: 20px;">
@@ -69,7 +69,7 @@ To make the transcribed data accessible, we built an intuitive, user-friendly we
 
 </div>
 
-#### **Platform Features**  
+### **Platform Features**  
 
 **1. Search Options:**  
 
@@ -129,7 +129,7 @@ Users can explore sandalwood cultivation knowledge through:
 
 ---
 
-### **Technical Stack**  
+## **Technical Stack**  
 **Frontend:** Next.js, Tailwind CSS  
 **Backend:** Django  
 **ASR:** Pyannote, Whisper-Kannada, AI4Bharat models  
@@ -137,20 +137,20 @@ Users can explore sandalwood cultivation knowledge through:
 
 ---
 
-### **Challenges Faced**  
+## **Challenges Faced**  
 1. **Colloquial Kannada:** Adapting ASR models to informal, colloquial speech was a significant challenge. We fine-tuned models to improve transcription accuracy.  
 2. **Noisy Data:** Publicly recorded audio often contained noise, necessitating sophisticated denoising and enhancement techniques.  
 3. **Bilingual Queries:** Ensuring seamless transitions between Kannada and English required advanced transliteration and translation algorithms.   
 
 ---
 
-### **Conclusion**  
+## **Conclusion**  
 SandalwoodAI exemplifies the fusion of tradition and technology. By providing bilingual access to sandalwood cultivation knowledge, it fosters cultural preservation and practical application. We are proud to contribute to the conservation and propagation of one of India’s most cherished resources.  
 
-## Contact
+## **Contact**
 
 For any issues or suggestions regarding the project, please contact us at `jaya2004kra@gmail.com`. We appreciate any feedback that can help us improve the application.
 
-## License
+## **License**
 
 All scripts and documentation in this repository are licensed under the GNU GENERAL PUBLIC LICENSE. You may use and modify them for educational purposes. However, we do not take responsibility for the accuracy or reliability of the programs.
